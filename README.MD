@@ -20,20 +20,20 @@ These are the functions contained in CarContract and the expected parameters (in
 *function CarContract*:  constructor.  Initializes a vehicle’s static information and sets the first owner of the car to whoever called the contract.
 
 Inputs:
-    * uint64 vin_:  Vehicle Identification Number (VIN).  This is a 17 digit number and every vehicle has its own unique number.
-    * string newCarMake:  The name of the car manufacturer, i.e. Honda.
-    * string newCarModel:  The type of car, i.e. Accord 1998.
+ * uint64 vin_:  Vehicle Identification Number (VIN).  This is a 17 digit number and every vehicle has its own unique number.
+ * string newCarMake:  The name of the car manufacturer, i.e. Honda.
+ * string newCarModel:  The type of car, i.e. Accord 1998.
 Outputs:  N/A
 
 *function getAllIndexes*:  Retrieves the array positions for the most recent owner and installed parts.
 
 Inputs:
-    * uint64 vin_:  Vehicle Identification Number (VIN).  
+ * uint64 vin_:  Vehicle Identification Number (VIN).  
 Outputs:
-    * uint8 ownerIndex
-    * uint8 airbagIndex
-    * uint8 engineIndex
-    * uint8 tiresIndex
+ * uint8 ownerIndex
+ * uint8 airbagIndex
+ * uint8 engineIndex
+ * uint8 tiresIndex
 
 *function getStaticCarInfo*:  Retrieves the vehicle information that does not change after the constructor is called.
 
@@ -47,41 +47,41 @@ Outputs:
 *function get<partName>*:  Part name can be “Airbag”, “Engine”, or “Tires”.  Gets all of the stored part information at the array position specified by an index parameter.
 
 Inputs:
-    * uint64 vin_:  Vehicle Identification Number (VIN). 
-    * uint8 arrayIndex_:  Position in array to retrieve part information from 
+ * uint64 vin_:  Vehicle Identification Number (VIN). 
+ * uint8 arrayIndex_:  Position in array to retrieve part information from 
 Outputs:
-    * string _part:  the part number
-    * uint _timeInstalled:  the time when the part was installed (seconds since 1970.01.01)
-    * uint _carMileage:  how many miles the car had when the part was installed
-    * string _whoInstalledPart:  name of the mechanic and shop where the part was installed
+ * string _part:  the part number
+ * uint _timeInstalled:  the time when the part was installed (seconds since 1970.01.01)
+ * uint _carMileage:  how many miles the car had when the part was installed
+ * string _whoInstalledPart:  name of the mechanic and shop where the part was installed
 
 *function change<partName>*:  Part name can be “Airbag”, “Engine”, or “Tires”.  Appends a new part to the end of a part array.  Previous parts’ information is preserved in the array.  The owner of the vehicle is the only one who can make a part change so this function checks that the sender of the request matches the owner address attached to the vehicle.
 
 Inputs:
-    * uint64 vin_:  Vehicle Identification Number (VIN). 
-    * string newPart:  Part number
-    * uint currentMileage:  Mileage of vehicle when part is changed
-    * string newMechanic:  Name of the mechanic who changed the part
+ * uint64 vin_:  Vehicle Identification Number (VIN). 
+ * string newPart:  Part number
+ * uint currentMileage:  Mileage of vehicle when part is changed
+ * string newMechanic:  Name of the mechanic who changed the part
 Outputs:  N/A
 
 *function changeOwner*:  This functions changes the owner address attached to the given VIN.  Only the current owner can change the owner address.  After it has been changed, the previous owner will lose the ability to edit any of the vehicle information.  The new owner becomes the one with sole access to make transactions against the contract.
 
 Inputs:
-    * uint64 vin_:  Vehicle Identification Number (VIN). 
-    * address newOwner:  Ethereum public key of the new owner
-    * uint currentMileage:  Mileage of the vehicle when the ownership changed
+ * uint64 vin_:  Vehicle Identification Number (VIN). 
+ * address newOwner:  Ethereum public key of the new owner
+ * uint currentMileage:  Mileage of the vehicle when the ownership changed
 Outputs:  N/A
 
 *function getOwner*:  Works the same as get<Part> except it returns owner information instead of part information.
 
 Inputs:
-    * uint64 vin_:  Vehicle Identification Number (VIN). 
-    * uint8 arrayIndex_:  Position in array to retrieve owner information from 
+ * uint64 vin_:  Vehicle Identification Number (VIN). 
+ * uint8 arrayIndex_:  Position in array to retrieve owner information from 
 Outputs:
-    * string _part:  the part number
-    * uint _timeInstalled:  the time when the part was installed (seconds since 1970.01.01)
-    * uint _carMileage:  how many miles the car had when the part was installed
-    * string _whoInstalledPart:  name of the mechanic and shop where the part was installed
+ * string _part:  the part number
+ * uint _timeInstalled:  the time when the part was installed (seconds since 1970.01.01)
+ * uint _carMileage:  how many miles the car had when the part was installed
+ * string _whoInstalledPart:  name of the mechanic and shop where the part was installed
 
 ## Test file:  testCarContract.js
 
@@ -89,13 +89,12 @@ The following list shows the tests run against CarContract.sol, using asynchrono
 ```
 truffle test ./test/testCarContract.js
 ```
-
-    1. Retrieve the static vehicle information and verify that it matches the information sent to the constructor.
-    2. Verify that the initial owner’s address matches the Ethereum public key of the account that created the contract.
-    3. Add an airbag part to the vehicle and retrieve that information using getAirbag().
-    4. Attempt to add a part to the vehicle from an authorized account.  Verify that the part is not added to the car’s log.
-    5. Create two different installations of tires to the vehicle and then read back the full tire history.
-    6. Change the owner of the vehicle and verify that the old owner can no longer add parts to the car’s log.
+ 1. Retrieve the static vehicle information and verify that it matches the information sent to the constructor.
+ 2. Verify that the initial owner’s address matches the Ethereum public key of the account that created the contract.
+ 3. Add an airbag part to the vehicle and retrieve that information using getAirbag().
+ 4. Attempt to add a part to the vehicle from an authorized account.  Verify that the part is not added to the car’s log.
+ 5. Create two different installations of tires to the vehicle and then read back the full tire history.
+ 6. Change the owner of the vehicle and verify that the old owner can no longer add parts to the car’s log.
 
 ## Areas for improvement:
 
