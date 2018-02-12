@@ -11,12 +11,11 @@ CarContract is meant to keep a history of all maintenance performed on a car, be
 
 ## Migration file:  4_deploy_carcontract.js
 
-*privateFor*
-Currently the CarContract is deployed with a privateFor parameter containing the address of Node2’s Constellation public key.  This means that only Node1 (the initiator of the contract) and Node2 (a recipient of the contract) can see the unencrypted data of the contract.  The encrypted data gets stored on the Ethereum blockchain, but no one outside of Node1 and Node2 can discern what the data means.  An important note: *privateFor* must be passed with every transaction.  The *privateFor* argument(s) in the transactions must be the same as what is used in the migration file when first creating the contract, otherwise the transaction looks like it is trying to execute against a completely different contract.
+This file should reside in the truffleProject/migrations/ direcotry.  Currently the CarContract is deployed with a privateFor parameter containing the address of Node2’s Constellation public key.  This means that only Node1 (the initiator of the contract) and Node2 (a recipient of the contract) can see the unencrypted data of the contract.  The encrypted data gets stored on the Ethereum blockchain, but no one outside of Node1 and Node2 can discern what the data means.  An important note: *privateFor* must be passed with every transaction.  The *privateFor* argument(s) in the transactions must be the same as what is used in the migration file when first creating the contract, otherwise the transaction looks like it is trying to execute against a completely different contract.
 
 ## Smart contract file:  CarContract.js
 
-These are the functions contained in CarContract and the expected parameters (inputs) and return values (outputs) for each.
+This file should reside in the truffleProject/contrancts/ directory.  These are the functions contained in CarContract and the expected parameters (inputs) and return values (outputs) for each.
 
 ### function CarContract: 
 The constructor.  Initializes a vehicle’s static information and sets the first owner of the car to whoever called the contract.
@@ -123,3 +122,27 @@ personal.unlockAccounts(accountPubAddress, accountPassword, 0);
 ```
 
 “testCarContract.js” is mostly hard-coded to test specific elements of the contract.  I haven’t figured out how to use loops within promises.  This would be helpful when looking at a particular part’s history.  I would like to run the getIndexes() function to determine how many instances of that part have ever been installed on the vehicle.  Using that number, I could run a loop to getPartInfo starting at index 0 and running until I have retrieved information for every instance of the part type.
+
+## Helful debugging routines
+
+The following sequence of commands run from the command line at truffleProject/ directory will restart the test network.  I found that this was necessary sometimes after trying to use migration files with errors in them.
+
+```
+$ docker rm -f $(docker ps -aq)
+$ docker network prune
+$ rm -rf build
+```
+
+In a different command line window, restart the network with the following command.
+
+```
+$ docker-compose -f tmp/docker-compose.yml up
+```
+
+Once the network is up and running, run the next few commands to test CarContract.sol.
+
+```
+$ truffle compile
+$ truffle migrate
+$ truffle test ./test/testCarContract.js
+```
