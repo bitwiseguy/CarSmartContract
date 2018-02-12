@@ -11,11 +11,11 @@ CarContract is meant to keep a history of all maintenance performed on a car, be
 
 ## Migration file:  4_deploy_carcontract.js
 
-This file should reside in the truffleProject/migrations/ direcotry.  Currently the CarContract is deployed with a privateFor parameter containing the address of Node2’s Constellation public key.  This means that only Node1 (the initiator of the contract) and Node2 (a recipient of the contract) can see the unencrypted data of the contract.  The encrypted data gets stored on the Ethereum blockchain, but no one outside of Node1 and Node2 can discern what the data means.  An important note: *privateFor* must be passed with every transaction.  The *privateFor* argument(s) in the transactions must be the same as what is used in the migration file when first creating the contract, otherwise the transaction looks like it is trying to execute against a completely different contract.
+This file should reside in the truffleProject/migrations/ directory.  Currently the CarContract is deployed with a privateFor parameter containing the address of Node2’s Constellation public key.  This means that only Node1 (the initiator of the contract) and Node2 (a recipient of the contract) can see the unencrypted data of the contract.  The encrypted data gets stored on the Ethereum blockchain, but no one outside of Node1 and Node2 can discern what the data means.  An important note: *privateFor* must be passed with every transaction.  The *privateFor* argument(s) in the transactions must be the same as what is used in the migration file when first creating the contract, otherwise the transaction looks like it is trying to execute against a completely different contract.
 
 ## Smart contract file:  CarContract.js
 
-This file should reside in the truffleProject/contrancts/ directory.  These are the functions contained in CarContract and the expected parameters (inputs) and return values (outputs) for each.
+This file should reside in the truffleProject/contracts/ directory.  These are the functions contained in CarContract.sol and the expected parameters (inputs) and return values (outputs) for each.
 
 ### function CarContract: 
 The constructor.  Initializes a vehicle’s static information and sets the first owner of the car to whoever called the contract.
