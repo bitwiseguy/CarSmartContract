@@ -10,8 +10,8 @@ CarContract is meant to keep a history of all maintenance performed on a car, be
 
 ## Migration file:  4_deploy_carcontract.js
 
-** privateFor
-Currently the CarContract is deployed with a privateFor parameter containing the address of Node2’s Constellation public key.  This means that only Node1 (the initiator of the contract) and Node2 (a recipient of the contract) can see the unencrypted data of the contract.  The encrypted data gets stored on the Ethereum blockchain, but no one outside of Node1 and Node2 can discern what the data means.  An important note: privateFor must be passed with every transaction.  The privateFor argument(s) in the transactions must be the same as what is used in the migration file when first creating the contract, otherwise the transaction looks like it is trying to execute against a completely different contract.
+*privateFor*
+Currently the CarContract is deployed with a privateFor parameter containing the address of Node2’s Constellation public key.  This means that only Node1 (the initiator of the contract) and Node2 (a recipient of the contract) can see the unencrypted data of the contract.  The encrypted data gets stored on the Ethereum blockchain, but no one outside of Node1 and Node2 can discern what the data means.  An important note: *privateFor* must be passed with every transaction.  The *privateFor* argument(s) in the transactions must be the same as what is used in the migration file when first creating the contract, otherwise the transaction looks like it is trying to execute against a completely different contract.
 
 ## Smart contract file:  CarContract.js
 
@@ -38,11 +38,11 @@ Outputs:
 *function getStaticCarInfo*:  Retrieves the vehicle information that does not change after the constructor is called.
 
 Inputs:
-    * uint64 vin_:  Vehicle Identification Number (VIN).  
+ * uint64 vin_:  Vehicle Identification Number (VIN).  
 Outputs:
-    * uint64 vinOut:  Vehicle Identification Number (VIN)
-    * string _carMake:  The name of the car manufacturer, i.e. Honda.
-    * string _carModel:  The type of car, i.e. Accord 1998.
+ * uint64 vinOut:  Vehicle Identification Number (VIN)
+ * string _carMake:  The name of the car manufacturer, i.e. Honda.
+ * string _carModel:  The type of car, i.e. Accord 1998.
 
 *function get<partName>*:  Part name can be “Airbag”, “Engine”, or “Tires”.  Gets all of the stored part information at the array position specified by an index parameter.
 
