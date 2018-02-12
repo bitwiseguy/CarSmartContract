@@ -24,13 +24,15 @@ Inputs:
  * uint64 vin_:  Vehicle Identification Number (VIN).  This is a 17 digit number and every vehicle has its own unique number.
  * string newCarMake:  The name of the car manufacturer, i.e. Honda.
  * string newCarModel:  The type of car, i.e. Accord 1998.
+ 
 Outputs:  N/A
 
 ### function getAllIndexes:
 Retrieves the array positions for the most recent owner and installed parts.
 
 Inputs:
- * uint64 vin_:  Vehicle Identification Number (VIN).  
+ * uint64 vin_:  Vehicle Identification Number (VIN).
+ 
 Outputs:
  * uint8 ownerIndex
  * uint8 airbagIndex
@@ -41,7 +43,8 @@ Outputs:
 Retrieves the vehicle information that does not change after the constructor is called.
 
 Inputs:
- * uint64 vin_:  Vehicle Identification Number (VIN).  
+ * uint64 vin_:  Vehicle Identification Number (VIN).
+ 
 Outputs:
  * uint64 vinOut:  Vehicle Identification Number (VIN)
  * string _carMake:  The name of the car manufacturer, i.e. Honda.
@@ -52,7 +55,8 @@ Part name can be “Airbag”, “Engine”, or “Tires”.  Gets all of the st
 
 Inputs:
  * uint64 vin_:  Vehicle Identification Number (VIN). 
- * uint8 arrayIndex_:  Position in array to retrieve part information from 
+ * uint8 arrayIndex_:  Position in array to retrieve part information from
+ 
 Outputs:
  * string _part:  the part number
  * uint _timeInstalled:  the time when the part was installed (seconds since 1970.01.01)
@@ -67,6 +71,7 @@ Inputs:
  * string newPart:  Part number
  * uint currentMileage:  Mileage of vehicle when part is changed
  * string newMechanic:  Name of the mechanic who changed the part
+ 
 Outputs:  N/A
 
 ### function changeOwner:
@@ -76,15 +81,17 @@ Inputs:
  * uint64 vin_:  Vehicle Identification Number (VIN). 
  * address newOwner:  Ethereum public key of the new owner
  * uint currentMileage:  Mileage of the vehicle when the ownership changed
+ 
 Outputs:  N/A
 
 ### function getOwner:
 Works the same as get<Part> except it returns owner information instead of part information.
 
-Inputs:
+**Inputs**:
  * uint64 vin_:  Vehicle Identification Number (VIN). 
- * uint8 arrayIndex_:  Position in array to retrieve owner information from 
-Outputs:
+ * uint8 arrayIndex_:  Position in array to retrieve owner information from
+ 
+**Outputs**:
  * string _part:  the part number
  * uint _timeInstalled:  the time when the part was installed (seconds since 1970.01.01)
  * uint _carMileage:  how many miles the car had when the part was installed
