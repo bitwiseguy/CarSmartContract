@@ -15,7 +15,7 @@ This file should reside in the truffleProject/migrations/ directory.  Currently 
 
 ## Smart contract file:  CarContract.js
 
-This file should reside in the truffleProject/contracts/ directory.  These are the functions contained in CarContract.sol and the expected parameters (inputs) and return values (outputs) for each.
+This file should reside in the truffleProject/contracts/ directory.  This section describes the functions contained in CarContract.sol and the expected parameters (inputs) and return values (outputs) for each.
 
 ### function CarContract: 
 The constructor.  Initializes a vehicle’s static information and sets the first owner of the car to whoever called the contract.
@@ -92,10 +92,12 @@ Works the same as getPartName() except it returns owner information instead of p
 
 ## Test file:  testCarContract.js
 
-The following list shows the tests run against CarContract.sol, using asynchronouse Node JS code with promises.  Put testCarContract.js in the truffleProject/test/ directory and run the following command from the truffle project root directory to execute the tests:
+Put testCarContract.js in the truffleProject/test/ directory and run the following command from the truffle project root directory to execute the tests:
 ```
 truffle test ./test/testCarContract.js
 ```
+The following list shows the tests run against CarContract.sol, using asynchronouse Node JS code with promises.
+
  1. Retrieve the static vehicle information and verify that it matches the information sent to the constructor.
  2. Verify that the initial owner’s address matches the Ethereum public key of the account that created the contract.
  3. Add an airbag part to the vehicle and retrieve that information using getAirbag().
@@ -119,21 +121,16 @@ personal.unlockAccounts(accountPubAddress, accountPassword, 0);
 ## Helpful debugging routines
 
 The following sequence of commands run from the command line at truffleProject/ directory will restart the test network.  I found that this was necessary sometimes after trying to use migration files with errors in them.
-
 ```
 $ docker rm -f $(docker ps -aq)
 $ docker network prune
 $ rm -rf build
 ```
-
 In a different command line window, restart the network with the following command.
-
 ```
 $ docker-compose -f tmp/docker-compose.yml up
 ```
-
 Once the network is up and running, run the next few commands from the truffleProject/ directory to test CarContract.sol.
-
 ```
 $ truffle compile
 $ truffle migrate
