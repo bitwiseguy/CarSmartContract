@@ -2,6 +2,7 @@ _Based on work by jimthematrix (https://github.com/jimthematrix/quorum/blob/mast
 
 # Smart contract to track the life of a car
 Author:  S.A. Stokes
+
 Date:  2018.02.11
 
 This document describes the intended functionality of a smart contract called CarContract.  The contract is written in Solidity and meant to run on Quorum, a permissioned blockchain based on ethereum.  The contract is meant to run on the test network built by the *jimthematrix* tutorial linked above.
@@ -50,8 +51,8 @@ Outputs:
  * string _carMake:  The name of the car manufacturer, i.e. Honda.
  * string _carModel:  The type of car, i.e. Accord 1998.
 
-### function get<partName>:
-Part name can be “Airbag”, “Engine”, or “Tires”.  Gets all of the stored part information at the array position specified by an index parameter.
+### function getPartName:
+PartName can be “Airbag”, “Engine”, or “Tires”.  Gets all of the stored part information at the array position specified by an index parameter.
 
 Inputs:
  * uint64 vin_:  Vehicle Identification Number (VIN). 
@@ -63,8 +64,8 @@ Outputs:
  * uint _carMileage:  how many miles the car had when the part was installed
  * string _whoInstalledPart:  name of the mechanic and shop where the part was installed
 
-### function change<partName>:
-Part name can be “Airbag”, “Engine”, or “Tires”.  Appends a new part to the end of a part array.  Previous parts’ information is preserved in the array.  The owner of the vehicle is the only one who can make a part change so this function checks that the sender of the request matches the owner address attached to the vehicle.
+### function changePartName:
+PartName can be “Airbag”, “Engine”, or “Tires”.  Appends a new part to the end of a part array.  Previous parts’ information is preserved in the array.  The owner of the vehicle is the only one who can make a part change so this function checks that the sender of the request matches the owner address attached to the vehicle.
 
 Inputs:
  * uint64 vin_:  Vehicle Identification Number (VIN). 
@@ -85,7 +86,7 @@ Inputs:
 Outputs:  N/A
 
 ### function getOwner:
-Works the same as get<Part> except it returns owner information instead of part information.
+Works the same as getPartName() except it returns owner information instead of part information.
 
 **Inputs**:
  * uint64 vin_:  Vehicle Identification Number (VIN). 
