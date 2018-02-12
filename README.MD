@@ -20,82 +20,75 @@ This file should reside in the truffleProject/contrancts/ directory.  These are 
 ### function CarContract: 
 The constructor.  Initializes a vehicle’s static information and sets the first owner of the car to whoever called the contract.
 
-Inputs:
- * uint64 vin_:  Vehicle Identification Number (VIN).  This is a 17 digit number and every vehicle has its own unique number.
- * string newCarMake:  The name of the car manufacturer, i.e. Honda.
- * string newCarModel:  The type of car, i.e. Accord 1998.
- 
-Outputs:  N/A
+ * Inputs:
+   * uint64 vin_:  Vehicle Identification Number (VIN).  This is a 17 digit number and every vehicle has its own unique number.
+   * string newCarMake:  The name of the car manufacturer, i.e. Honda.
+   * string newCarModel:  The type of car, i.e. Accord 1998.
+ * Outputs:  N/A
 
 ### function getAllIndexes:
 Retrieves the array positions for the most recent owner and installed parts.
 
-Inputs:
- * uint64 vin_:  Vehicle Identification Number (VIN).
- 
-Outputs:
- * uint8 ownerIndex
- * uint8 airbagIndex
- * uint8 engineIndex
- * uint8 tiresIndex
+ * Inputs:
+   * uint64 vin_:  Vehicle Identification Number (VIN).
+ * Outputs:
+   * uint8 ownerIndex
+   * uint8 airbagIndex
+   * uint8 engineIndex
+   * uint8 tiresIndex
 
 ### function getStaticCarInfo:
 Retrieves the vehicle information that does not change after the constructor is called.
 
-Inputs:
- * uint64 vin_:  Vehicle Identification Number (VIN).
- 
-Outputs:
- * uint64 vinOut:  Vehicle Identification Number (VIN)
- * string _carMake:  The name of the car manufacturer, i.e. Honda.
- * string _carModel:  The type of car, i.e. Accord 1998.
+ * Inputs:
+   * uint64 vin_:  Vehicle Identification Number (VIN).
+ * Outputs:
+   * uint64 vinOut:  Vehicle Identification Number (VIN)
+   * string _carMake:  The name of the car manufacturer, i.e. Honda.
+   * string _carModel:  The type of car, i.e. Accord 1998.
 
 ### function getPartName:
 PartName can be “Airbag”, “Engine”, or “Tires”.  Gets all of the stored part information at the array position specified by an index parameter.
 
-Inputs:
- * uint64 vin_:  Vehicle Identification Number (VIN). 
- * uint8 arrayIndex_:  Position in array to retrieve part information from
- 
-Outputs:
- * string _part:  the part number
- * uint _timeInstalled:  the time when the part was installed (seconds since 1970.01.01)
- * uint _carMileage:  how many miles the car had when the part was installed
- * string _whoInstalledPart:  name of the mechanic and shop where the part was installed
+ * Inputs:
+   * uint64 vin_:  Vehicle Identification Number (VIN). 
+   * uint8 arrayIndex_:  Position in array to retrieve part information from
+ * Outputs:
+   * string _part:  the part number
+   * uint _timeInstalled:  the time when the part was installed (seconds since 1970.01.01)
+   * uint _carMileage:  how many miles the car had when the part was installed
+   * string _whoInstalledPart:  name of the mechanic and shop where the part was installed
 
 ### function changePartName:
 PartName can be “Airbag”, “Engine”, or “Tires”.  Appends a new part to the end of a part array.  Previous parts’ information is preserved in the array.  The owner of the vehicle is the only one who can make a part change so this function checks that the sender of the request matches the owner address attached to the vehicle.
 
-Inputs:
- * uint64 vin_:  Vehicle Identification Number (VIN). 
- * string newPart:  Part number
- * uint currentMileage:  Mileage of vehicle when part is changed
- * string newMechanic:  Name of the mechanic who changed the part
- 
-Outputs:  N/A
+ * Inputs:
+   * uint64 vin_:  Vehicle Identification Number (VIN). 
+   * string newPart:  Part number
+   * uint currentMileage:  Mileage of vehicle when part is changed
+   * string newMechanic:  Name of the mechanic who changed the part
+ * Outputs:  N/A
 
 ### function changeOwner:
 This functions changes the owner address attached to the given VIN.  Only the current owner can change the owner address.  After it has been changed, the previous owner will lose the ability to edit any of the vehicle information.  The new owner becomes the one with sole access to make transactions against the contract.
 
-Inputs:
- * uint64 vin_:  Vehicle Identification Number (VIN). 
- * address newOwner:  Ethereum public key of the new owner
- * uint currentMileage:  Mileage of the vehicle when the ownership changed
- 
-Outputs:  N/A
+ * Inputs:
+   * uint64 vin_:  Vehicle Identification Number (VIN). 
+   * address newOwner:  Ethereum public key of the new owner
+   * uint currentMileage:  Mileage of the vehicle when the ownership changed
+ * Outputs:  N/A
 
 ### function getOwner:
 Works the same as getPartName() except it returns owner information instead of part information.
 
-**Inputs**:
- * uint64 vin_:  Vehicle Identification Number (VIN). 
- * uint8 arrayIndex_:  Position in array to retrieve owner information from
- 
-**Outputs**:
- * string _part:  the part number
- * uint _timeInstalled:  the time when the part was installed (seconds since 1970.01.01)
- * uint _carMileage:  how many miles the car had when the part was installed
- * string _whoInstalledPart:  name of the mechanic and shop where the part was installed
+ * Inputs:
+   * uint64 vin_:  Vehicle Identification Number (VIN). 
+   * uint8 arrayIndex_:  Position in array to retrieve owner information from
+ * Outputs:
+   * string _part:  the part number
+   * uint _timeInstalled:  the time when the part was installed (seconds since 1970.01.01)
+   * uint _carMileage:  how many miles the car had when the part was installed
+   * string _whoInstalledPart:  name of the mechanic and shop where the part was installed
 
 ## Test file:  testCarContract.js
 
@@ -123,7 +116,7 @@ personal.unlockAccounts(accountPubAddress, accountPassword, 0);
 
 “testCarContract.js” is mostly hard-coded to test specific elements of the contract.  I haven’t figured out how to use loops within promises.  This would be helpful when looking at a particular part’s history.  I would like to run the getIndexes() function to determine how many instances of that part have ever been installed on the vehicle.  Using that number, I could run a loop to getPartInfo starting at index 0 and running until I have retrieved information for every instance of the part type.
 
-## Helful debugging routines
+## Helpful debugging routines
 
 The following sequence of commands run from the command line at truffleProject/ directory will restart the test network.  I found that this was necessary sometimes after trying to use migration files with errors in them.
 
@@ -139,7 +132,7 @@ In a different command line window, restart the network with the following comma
 $ docker-compose -f tmp/docker-compose.yml up
 ```
 
-Once the network is up and running, run the next few commands to test CarContract.sol.
+Once the network is up and running, run the next few commands from the truffleProject/ directory to test CarContract.sol.
 
 ```
 $ truffle compile
