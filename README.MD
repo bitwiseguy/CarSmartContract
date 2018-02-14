@@ -11,13 +11,13 @@ CarContract is meant to keep a history of all maintenance performed on a car, be
 
 ## Introduction
 
-After building the test network described by *jimthematrix*, make a new truffle directory and initialize the truffle development environment with the following series of commands
+After building the test network described by *jimthematrix*, make a new truffle directory and initialize the truffle development environment with the following series of commands:
 ```
 mkdir truffleProject
 cd truffleProject
 truffle init
 ```
-This will create directories and files that will be used to run our smart contract.  Make sure that the *truffle.js* file looks like the one in this repository with the proper value assigned to *gas* and the initial network titled *development*.
+This will create directories and files that will be used to run our smart contract.  Make sure that the */truffleProject/truffle.js* file looks like the one in this repository with the proper value assigned to *gas* and the initial network titled *development*.
 
 ## Migration file:  4_deploy_carcontract.js
 
