@@ -17,7 +17,7 @@ mkdir truffleProject
 cd truffleProject
 truffle init
 ```
-This will create directories and files that will be used to run our smart contract.  Make sure that the */truffleProject/truffle.js* file looks like the one in this repository with the proper value assigned to *gas* for each network and the initial network titled *development*.  In the *4_deploy_carcontract.js* and *testCarContract.js* files described below, change the *toKeys* variable at the top of each file to the public Quorum address in the following directory: 
+This will create directories and files that will be used to run our smart contract.  Make sure that the */truffleProject/truffle.js* file looks like the one in this repository with the proper value assigned to *gas* for each network and the initial network titled *development*.  In the *4_deploy_carcontract.js* and *testCarContract.js* files described below, change the *toKeys* variable at the top of each file to the public Quorum address found in the following file: 
 ```
 jimthematrixRepositoryName/build/docker/tests/tmp/qdata_2/constellation/tm.pub  
 ```
