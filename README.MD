@@ -9,6 +9,16 @@ This document describes the intended functionality of a smart contract called Ca
 
 CarContract is meant to keep a history of all maintenance performed on a car, beginning with the car’s inception at the manufacturer.  A car owner maybe interested in this information if they want to look at the average number of miles a particular brand of tire usually lasts on their vehicle, when was the last time they replaced their timing belt, or if they want to identify the mechanic who faultily installed a particular part.  By storing this information on the public Ethereum blockchain, the authenticity of the information is ensured because all state changes are recorded.  Before the car is sold, the potential buyer could view the entire car history and feel more comfortable assigning an accurate value to the car.  Please view the “Areas for Improvement” section at the end of this document for a description of the next features that need to be added to CarContract.
 
+## Introduction
+
+After building the test network described by *jimthematrix*, make a new truffle directory and initialize the truffle development environment with the following series of commands
+```
+mkdir truffleProject
+cd truffleProject
+truffle init
+```
+This will create directories and files that will be used to run our smart contract.  Make sure that the *truffle.js* file looks like the one in this repository with the proper value assigned to *gas* and the initial network titled *development*.
+
 ## Migration file:  4_deploy_carcontract.js
 
 This file should reside in the truffleProject/migrations/ directory.  Currently the CarContract is deployed with a privateFor parameter containing the address of Node2’s Constellation public key.  This means that only Node1 (the initiator of the contract) and Node2 (a recipient of the contract) can see the unencrypted data of the contract.  The encrypted data gets stored on the Ethereum blockchain, but no one outside of Node1 and Node2 can discern what the data means.  An important note: *privateFor* must be passed with every transaction.  The *privateFor* argument(s) in the transactions must be the same as what is used in the migration file when first creating the contract, otherwise the transaction looks like it is trying to execute against a completely different contract.
